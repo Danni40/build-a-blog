@@ -23,12 +23,23 @@ def index():
     blogs = Blog.query.all()
     return render_template("blogs.html", blogs=blogs)
 
-@app.route("/blog/<blog_id>", methods=['POST', 'GET'])
-def indvidual_blogpost(blog_id):
-    post = Blog.query.get(blog_id)
+@app.route("/blog", methods=['GET','POST'])
+def blogs():
+    #post = Blog.query.get('id')
+    blog_id = request.args.get('id')
+    post=Blog.query.get(blog_id)
     #print(post)
     #print('6'*500)
     return render_template('individual_entry.html', title=post.title, post=post)
+'''
+@app.route("/blog/<blog_id>", methods=['POST', 'GET'])
+def indvidual_blogpost(blog_id):
+    post = Blog.query.get(blog_id)
+    #post = request.args.get('id')
+    #print(post)
+    #print('6'*500)
+    return render_template('individual_entry.html', title=post.title, post=post)
+'''
 
 @app.route("/newblog", methods=['POST', 'GET'])
 def index2():
